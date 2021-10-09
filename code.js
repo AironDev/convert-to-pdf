@@ -39,7 +39,7 @@ exports.handler = async ({filename}) => {
   //   })
   //   .promise();
   
-  return readFileSync(`/tmp/${filename}`)
+  // return readFileSync(`/tmp/${filename}`)
 
-  // return `https://s3.amazonaws.com/lambda-libreoffice-demo/${outputFilename}`;
+  return `https://s3.amazonaws.com/lambda-libreoffice-demo/${outputFilename}`;
 };
