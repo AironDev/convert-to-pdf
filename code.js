@@ -21,7 +21,7 @@ exports.handler = async ({filename}) => {
   //     console.error('file write:', err);
   //   }
 
-  // spawnSync(`cd /tmp && ${convertCommand} ${filename}`);
+  execSync(`cd /tmp && ${convertCommand} ${filename}`);
   
   // try {
   //     console.log(execSync(convertCommand).toString('utf8'));
@@ -30,17 +30,17 @@ exports.handler = async ({filename}) => {
   //   }
   //   console.log(execSync('ls -alh /tmp').toString('utf8'));
 
-  // const outputFilename = `${parse(filename).name}.pdf`;
+  const outputFilename = `${parse(filename).name}.pdf`;
   // const outputFileBuffer = readFileSync(`/tmp/${outputFilename}`);
 
-  // await s3
-  //   .upload({
-  //     Key: outputFilename, Body: outputFileBuffer,
-  //     ACL: 'public-read', ContentType: 'application/pdf'
-  //   })
-  //   .promise();
+  await s3
+    .upload({
+      Key: outputFilename, Body: outputFileBuffer,
+      ACL: 'public-read', ContentType: 'application/pdf'
+    })
+    .promise();
   
   // return readFileSync(`/tmp/${filename}`)
 
-  return `https://s3.amazonaws.com/lambda-libreoffice-demo/${filename}`;
+  return `https://s3.amazonaws.com/lambda-libreoffice-demo/${outputFilename}`;
 };
