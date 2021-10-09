@@ -10,7 +10,7 @@ const {S3} = require('aws-sdk');
 
 const inputPath = path.join( '/opt', 'lo.tar.br'); 
 const outputPath = '/tmp/';
-const bucketName = process.env.SOURCE_BUCKET;
+const bucketName = 'authoran-files';
 
 module.exports.handler = async ({filename}, event) => {
 execSync('ls -alh /opt').toString('utf8');
@@ -79,7 +79,7 @@ execSync('ls -alh /opt').toString('utf8');
       s3.putObject({
        Body: buffer,
        Key: fileName,
-       Bucket: process.env.DESTINATION_BUCKET,
+       Bucket: 'authoran-lambda-conv',
       }, (error) => {
        if (error) {
         reject(error);
