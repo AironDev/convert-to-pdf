@@ -15,8 +15,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: npm install and build
         run: |
-          yarn ci
-          yarn run build --if-present
+          yarn
+          yarn build --if-present
         env:
           CI: true
       - name: zip
