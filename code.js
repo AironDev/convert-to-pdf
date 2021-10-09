@@ -10,37 +10,33 @@ const {S3} = require('aws-sdk');
 
 const inputPath = path.join( '/opt', 'lo.tar.br'); 
 const outputPath = '/tmp/';
-const bucketName = 'authoran-files';
+const bucketName = process.env.SOURCE_BUCKET;
 
-module.exports.handler = async ({filename}) => {
-  console.log(execSync('ls -alh /opt').toString('utf8'));
-
+module.exports.handler = async ({filename, Records}) => {
+execSync('ls -alh /opt').toString('utf8');
   try {
     // Decompressing
     let decompressed = {
       file: await lambdafs.inflate(inputPath)
     };
- 
-    console.log('output brotli de:----', decompressed); 
+    console.log('Error brotli decompressed'); 
   } catch (error) {
     console.log('Error brotli de:----', error);
   }
  
   try {
-    console.log(execSync('ls -alh /opt').toString('utf8')); 
+    execSync('ls -alh /opt'); 
   } catch (e) {
     console.log(e);
   }
 
-  var body = "";
   // s3 put event
-  // body = event.Records[0].body;
-  // body = 'example.docx';
-  // const filename = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, ' '));
+  const eventFilename = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, ' '));
+
   console.log('s3 bucket file name from event:', filename);
 
   // get file from s3 bucketv
-  var s3fileName = filename;
+  var s3fileName = eventFilename? eventFilename : filename;
   var newFileName = Date.now()+'.pdf';
   const s3 = new S3();
   var fileStream = fs.createWriteStream('/tmp/'+s3fileName);
@@ -81,7 +77,7 @@ module.exports.handler = async ({filename}) => {
       s3.putObject({
        Body: buffer,
        Key: fileName,
-       Bucket: bucketName,
+       Bucket: process.env.DESTINATION_BUCKET,
       }, (error) => {
        if (error) {
         reject(error);
