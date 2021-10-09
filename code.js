@@ -17,7 +17,7 @@ exports.handler = async ({filename}) => {
   try{  
       writeFileSync('/tmp/'+filename, inputFileBuffer);
     } catch(err) {
-      // An error occurred
+      // An error occurrede
       console.error('file write:', err);
     }
 
