@@ -1,48 +1,101 @@
-const {writeFileSync, readFileSync} = require('fs');
-const {execSync, spawnSync} = require('child_process');
-// const {spawnSync} = require('child_process');
-const {parse} = require('path');
+const path = require('path');
+const fs = require('fs');
+var async = require('async');
+const {writeFileSync} = require('fs');
+const lambdafs = require('lambdafs');
+const {execSync} = require('child_process');
 const {S3} = require('aws-sdk');
 
-// This code runs only once per Lambda "cold start" p
-spawnSync(`curl https://s3.amazonaws.com/authoran-lambda-conv/lo.tar.gz -o /tmp/lo.tar.gz && cd /tmp && tar -xf /tmp/lo.tar.gz`);
 
-const s3 = new S3({params: {Bucket: 'authoran-lambda-conv'}});
-const convertCommand = `/tmp/instdir/program/soffice --headless --invisible --nodefault --nofirststartwizard --nolockcheck --nologo --norestore --convert-to pdf --outdir /tmp`;
+const inputPath = path.join( '/opt', 'lo.tar.br'); 
+const outputPath = '/tmp/';
+const bucketName = 'authoran-files';
 
-exports.handler = async ({filename}) => {
-  const {Body: inputFileBuffer} = await s3.getObject({Key: filename}).promise();
-  // writeFileSync(`/tmp/${filename}`, inputFileBuffer);
-  
-  // try{  
-  //     writeFileSync('/tmp/'+filename, inputFileBuffer);
-  //   } catch(err) {
-  //     // An error occurrede
-  //     console.error('file write:', err);
-  //   }
+module.exports.handler = async (event, context) => {
+  console.log(execSync('ls -alh /opt').toString('utf8'));
 
-  execSync(`cd /tmp && ${convertCommand} ${filename}`);
-  
-  // try {
-  //     console.log(execSync(convertCommand).toString('utf8'));
-  //   } catch (e) {
-  //     console.log(execSync(convertCommand).toString('utf8'));
-  //   }
-  //   console.log(execSync('ls -alh /tmp').toString('utf8'));
+  try {
+    // Decompressing
+    let decompressed = {
+      file: await lambdafs.inflate(inputPath)
+    };
+ 
+    console.log('output brotli de:----', decompressed); 
+  } catch (error) {
+    console.log('Error brotli de:----', error);
+  }
+ 
+  try {
+    console.log(execSync('ls -alh /opt').toString('utf8')); 
+  } catch (e) {
+    console.log(e);
+  }
 
-  const outputFilename = `${parse(filename).name}.pdf`;
-  // const outputFileBuffer = readFileSync(`/tmp/${outputFilename}`);
+  var body = "";
+  console.log(event)
+  // S3 put event
+  // body = event.Records[0].body;
+  // body = 'example.docx';
+  const filename = decodeURIComponent(event.Records[0].S3.object.key.replace(/\+/g, ' '));
+  console.log('S3 bucket file name from event:', filename);
 
-  await s3
-    .upload({
-      Key: outputFilename, Body: outputFileBuffer,
-      ACL: 'public-read', ContentType: 'application/pdf'
-    })
-    .promise();
-  
-  // return readFileSync(`/tmp/${filename}`)
+  // get file from S3 bucket
+  var s3fileName = filename;
+  var newFileName = Date.now()+'.pdf';
+  var S3 = new AWS.S3({apiVersion: '2006-03-01'});
+  var fileStream = fs.createWriteStream('/tmp/'+s3fileName);
 
-  return `https://s3.amazonaws.com/lambda-libreoffice-demo/${outputFilename}`;
+  var getObject = function(keyFile) {
+      return new Promise(function(success, reject) {
+          S3.getObject(
+              { Bucket: bucketName, Key: keyFile },
+              function (error, data) {
+                  if(error) {
+                      reject(error);
+                  } else {
+                      success(data);
+                  }
+              }
+          );
+      });
+  }
+
+  let fileData = await getObject(s3fileName);
+    try{  
+      fs.writeFileSync('/tmp/'+s3fileName, fileData.Body);
+    } catch(err) {
+      // An error occurred
+      console.error('file write:', err);
+    }
+
+    const convertCommand = `export HOME=/tmp && /tmp/lo/instdir/program/soffice.bin --headless --norestore --invisible --nodefault --nofirststartwizard --nolockcheck --nologo --convert-to "pdf:writer_pdf_Export" --outdir /tmp /tmp/${s3fileName}`;
+    try {
+      console.log(execSync(convertCommand).toString('utf8'));
+    } catch (e) {
+      console.log(execSync(convertCommand).toString('utf8'));
+    }
+    console.log(execSync('ls -alh /tmp').toString('utf8'));
+
+    function uploadFile(buffer, fileName) {
+     return new Promise((resolve, reject) => {
+      S3.putObject({
+       Body: buffer,
+       Key: fileName,
+       Bucket: bucketName,
+      }, (error) => {
+       if (error) {
+        reject(error);
+       } else {
+
+        resolve(fileName);
+       }
+      });
+     });
+    }
+
+
+    let fileParts = s3fileName.substr(0, s3fileName.lastIndexOf(".")) + ".pdf";
+    let fileB64data = fs.readFileSync('/tmp/'+fileParts);
+    await uploadFile(fileB64data, 'pdf/'+fileParts);
+    console.log('new pdf converted and uploaded!!!');
 };
-
-
