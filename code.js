@@ -14,33 +14,33 @@ exports.handler = async ({filename}) => {
   const {Body: inputFileBuffer} = await s3.getObject({Key: filename}).promise();
   // writeFileSync(`/tmp/${filename}`, inputFileBuffer);
   
-  try{  
-      writeFileSync('/tmp/'+filename, inputFileBuffer);
-    } catch(err) {
-      // An error occurrede
-      console.error('file write:', err);
-    }
+  // try{  
+  //     writeFileSync('/tmp/'+filename, inputFileBuffer);
+  //   } catch(err) {
+  //     // An error occurrede
+  //     console.error('file write:', err);
+  //   }
 
-  spawnSync(`cd /tmp && ${convertCommand} ${filename}`);
+  // spawnSync(`cd /tmp && ${convertCommand} ${filename}`);
   
-  try {
-      console.log(execSync(convertCommand).toString('utf8'));
-    } catch (e) {
-      console.log(execSync(convertCommand).toString('utf8'));
-    }
-    console.log(execSync('ls -alh /tmp').toString('utf8'));
+  // try {
+  //     console.log(execSync(convertCommand).toString('utf8'));
+  //   } catch (e) {
+  //     console.log(execSync(convertCommand).toString('utf8'));
+  //   }
+  //   console.log(execSync('ls -alh /tmp').toString('utf8'));
 
-  const outputFilename = `${parse(filename).name}.pdf`;
-  const outputFileBuffer = readFileSync(`/tmp/${outputFilename}`);
+  // const outputFilename = `${parse(filename).name}.pdf`;
+  // const outputFileBuffer = readFileSync(`/tmp/${outputFilename}`);
 
-  await s3
-    .upload({
-      Key: outputFilename, Body: outputFileBuffer,
-      ACL: 'public-read', ContentType: 'application/pdf'
-    })
-    .promise();
+  // await s3
+  //   .upload({
+  //     Key: outputFilename, Body: outputFileBuffer,
+  //     ACL: 'public-read', ContentType: 'application/pdf'
+  //   })
+  //   .promise();
   
   // return readFileSync(`/tmp/${filename}`)
 
-  return `https://s3.amazonaws.com/lambda-libreoffice-demo/${outputFilename}`;
+  return `https://s3.amazonaws.com/lambda-libreoffice-demo/${filename}`;
 };
