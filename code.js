@@ -11,7 +11,7 @@ const inputPath = path.join( '/opt', 'lo.tar.br');
 const outputPath = '/tmp/';
 const bucketName = 'authoran-files';
 
-module.exports.handler = async (event, context) => {
+module.exports.handler = async ({filename}) => {
   console.log(execSync('ls -alh /opt').toString('utf8'));
 
   try {
@@ -36,7 +36,7 @@ module.exports.handler = async (event, context) => {
   // S3 put event
   // body = event.Records[0].body;
   // body = 'example.docx';
-  const filename = decodeURIComponent(event.Records[0].S3.object.key.replace(/\+/g, ' '));
+  // const filename = decodeURIComponent(event.Records[0].S3.object.key.replace(/\+/g, ' '));
   console.log('S3 bucket file name from event:', filename);
 
   // get file from S3 bucket
