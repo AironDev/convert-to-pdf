@@ -34,7 +34,7 @@ execSync('ls -alh /opt').toString('utf8');
   console.log('s3 bucket file name from event:', filename);
 
   // get file from s3 bucketv
-  if(event){
+  if(event.Records[0]){
     var s3fileName = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, ' '));
   }else{
     var s3fileName = filename;
