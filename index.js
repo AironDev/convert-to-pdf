@@ -92,6 +92,6 @@ execSync('ls -alh /opt').toString('utf8');
 
     let fileParts = s3fileName.substr(0, s3fileName.lastIndexOf(".")) + ".pdf";
     let fileB64data = fs.readFileSync('/tmp/'+fileParts);
-    await uploadFile(fileB64data, 'pdf/'+fileParts);
+    await uploadFile(fileB64data, fileParts);
     console.log('new pdf converted and uploaded!!!');
 };
