@@ -4,7 +4,6 @@ var async = require('async');
 const {writeFileSync} = require('fs');
 const lambdafs = require('lambdafs');
 const {execSync} = require('child_process');
-const {S3} = require('aws-sdk');
 
 
 const inputPath = path.join( '/opt', 'lo.tar.br'); 
@@ -32,21 +31,21 @@ module.exports.handler = async ({filename}) => {
   }
 
   var body = "";
-  // S3 put event
+  // s3 put event
   // body = event.Records[0].body;
   // body = 'example.docx';
-  // const filename = decodeURIComponent(event.Records[0].S3.object.key.replace(/\+/g, ' '));
-  console.log('S3 bucket file name from event:', filename);
+  // const filename = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, ' '));
+  console.log('s3 bucket file name from event:', filename);
 
-  // get file from S3 bucket
+  // get file from s3 bucketv
   var s3fileName = filename;
   var newFileName = Date.now()+'.pdf';
-  // var S3 = new AWS.S3({apiVersion: '2006-03-01'});
+  const s3 = new S3();
   var fileStream = fs.createWriteStream('/tmp/'+s3fileName);
 
   var getObject = function(keyFile) {
       return new Promise(function(success, reject) {
-          S3.getObject(
+          s3.getObject(
               { Bucket: bucketName, Key: keyFile },
               function (error, data) {
                   if(error) {
@@ -77,7 +76,7 @@ module.exports.handler = async ({filename}) => {
 
     function uploadFile(buffer, fileName) {
      return new Promise((resolve, reject) => {
-      S3.putObject({
+      s3.putObject({
        Body: buffer,
        Key: fileName,
        Bucket: bucketName,
