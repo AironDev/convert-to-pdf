@@ -7,7 +7,7 @@ const {S3} = require('aws-sdk');
 // This code runs only once per Lambda "cold start" p
 spawnSync(`curl https://s3.amazonaws.com/authoran-lambda-conv/lo.tar.gz -o /tmp/lo.tar.gz && cd /tmp && tar -xf /tmp/lo.tar.gz`);
 
-const s3 = new S3({params: {Bucket: 'authoran-files'}});
+const s3 = new S3({params: {Bucket: 'authoran-lambda-conv'}});
 const convertCommand = `/tmp/instdir/program/soffice --headless --invisible --nodefault --nofirststartwizard --nolockcheck --nologo --norestore --convert-to pdf --outdir /tmp`;
 
 exports.handler = async ({filename}) => {
@@ -44,3 +44,5 @@ exports.handler = async ({filename}) => {
 
   return `https://s3.amazonaws.com/lambda-libreoffice-demo/${outputFilename}`;
 };
+
+
