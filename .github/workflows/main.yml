@@ -9,14 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name:s Ue Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: yarn install and build
+      - name: npm install and build
         run: |
           yarn ci
-          yarn build --if-present
+          yarn run build --if-present
         env:
           CI: true
       - name: zip
