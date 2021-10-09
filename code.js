@@ -41,7 +41,7 @@ module.exports.handler = async ({filename}) => {
   // get file from S3 bucket
   var s3fileName = filename;
   var newFileName = Date.now()+'.pdf';
-  var S3 = new AWS.S3({apiVersion: '2006-03-01'});
+  // var S3 = new AWS.S3({apiVersion: '2006-03-01'});
   var fileStream = fs.createWriteStream('/tmp/'+s3fileName);
 
   var getObject = function(keyFile) {
