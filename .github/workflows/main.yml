@@ -16,7 +16,6 @@ jobs:
       - name: npm install and build
         run: |
           yarn
-          yarn build --if-present
         env:
           CI: true
       - name: zip
