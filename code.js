@@ -22,22 +22,23 @@ exports.handler = async ({filename}) => {
     }
 
   spawnSync(`cd /tmp && ${convertCommand} ${filename}`);
-  // try {
-  //     console.log(execSync(convertCommand).toString('utf8'));
-  //   } catch (e) {
-  //     console.log(execSync(convertCommand).toString('utf8'));
-  //   }
-  //   console.log(execSync('ls -alh /tmp').toString('utf8'));
+  
+  try {
+      console.log(execSync(convertCommand).toString('utf8'));
+    } catch (e) {
+      console.log(execSync(convertCommand).toString('utf8'));
+    }
+    console.log(execSync('ls -alh /tmp').toString('utf8'));
 
-  // const outputFilename = `${parse(filename).name}.pdf`;
-  // const outputFileBuffer = readFileSync(`/tmp/${outputFilename}`);
+  const outputFilename = `${parse(filename).name}.pdf`;
+  const outputFileBuffer = readFileSync(`/tmp/${outputFilename}`);
 
-  // await s3
-  //   .upload({
-  //     Key: outputFilename, Body: outputFileBuffer,
-  //     ACL: 'public-read', ContentType: 'application/pdf'
-  //   })
-  //   .promise();
+  await s3
+    .upload({
+      Key: outputFilename, Body: outputFileBuffer,
+      ACL: 'public-read', ContentType: 'application/pdf'
+    })
+    .promise();
   
   // return readFileSync(`/tmp/${filename}`)
 
