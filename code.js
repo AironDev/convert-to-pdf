@@ -6,8 +6,6 @@ const lambdafs = require('lambdafs');
 const {execSync} = require('child_process');
 const {S3} = require('aws-sdk');
 
-
-
 const inputPath = path.join( '/opt', 'lo.tar.br'); 
 const outputPath = '/tmp/';
 const bucketName = process.env.SOURCE_BUCKET;
@@ -33,7 +31,7 @@ execSync('ls -alh /opt').toString('utf8');
 
   console.log('s3 bucket file name from event:', filename);
 
-  // get file from s3 bucketv
+  // get file from s3 bucketvd
   if(event.Records){
     var s3fileName = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, ' '));
   }else{
