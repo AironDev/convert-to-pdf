@@ -28,15 +28,18 @@ execSync('ls -alh /opt').toString('utf8');
     console.log(e);
   }
 
-
-  console.log('s3 bucket file name from event:', filename);
-
   // get file from s3 bucketvd
   if(event.Records){
     var s3fileName = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, ' '));
+    console.log('Object Event running ' + s3fileName); 
   }else{
     var s3fileName = filename;
+    console.log('Manual event triggered ' + s3fileName); 
   }
+  
+  console.log('s3 bucket file name from event:', s3fileName);
+
+
   var newFileName = Date.now()+'.pdf';
   const s3 = new S3();
   var fileStream = fs.createWriteStream('/tmp/'+s3fileName);
