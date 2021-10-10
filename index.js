@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const watermark = require('image-watermark');
 var async = require('async');
 const {writeFileSync} = require('fs');
 const lambdafs = require('lambdafs');
@@ -76,6 +77,8 @@ execSync('ls -alh /opt').toString('utf8');
     // console log  contents of /tmp
     console.log(execSync('ls -alh /tmp').toString('utf8'));
 
+
+
     // upload converted document to s3
     function uploadFile(buffer, fileName) {
      return new Promise((resolve, reject) => {
@@ -95,14 +98,19 @@ execSync('ls -alh /opt').toString('utf8');
 
     let fileParts = s3fileName.substr(0, s3fileName.lastIndexOf(".")) + ".pdf";
     let fileB64data = fs.readFileSync('/tmp/'+fileParts);
-    
+
+    // add watermark
+    watermark.embedWatermark('/tmp/'+fileParts, {'text': 'downloaded from authoran.com'});
+
+
     if(returnRaw){
       return fileB64data
     }else{
       await uploadFile(fileB64data, fileParts);
        // Host-Style Naming: http://mybucket.s3-us-west-2.amazonaws.com
       // Path-Style Naming: http://s3-us-west-2.amazonaws.com/mybucket
-      let uploadedFileUrl =  `https://s3-eu-west-2.amazonaws.com/${process.env.DESTINATION_BUCKET_REGION}/${fileParts}`
+      // https://authoran-files.s3.eu-west-2.amazonaws.com/example.pdf
+      let uploadedFileUrl =  `https://${process.env.DESTINATION_BUCKET_REGION}.s3-eu-west-2.amazonaws.com/${fileParts}`
       console.log('new pdf converted and uploaded!!! ' + uploadedFileUrl);
       return uploadedFileUrl
     }  

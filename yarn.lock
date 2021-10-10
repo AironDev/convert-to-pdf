@@ -61,6 +61,19 @@ ieee754@^1.1.13:
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.2.1.tgz#8eb7a10a63fff25d15a57b001586d177d1b0d352"
   integrity sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==
 
+image-watermark@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/image-watermark/-/image-watermark-0.0.7.tgz#e504c7dd4334645d95776f8fc55077bd1bc5aa22"
+  integrity sha1-5QTH3UM0ZF2Vd2+PxVB3vRvFqiI=
+  dependencies:
+    imagemagick ""
+    node-ratify ""
+
+imagemagick@:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/imagemagick/-/imagemagick-0.1.3.tgz#7483cea093b4d9f2e2f396857adc8821b537c56a"
+  integrity sha1-dIPOoJO02fLi85aFetyIIbU3xWo=
+
 inherits@2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
@@ -82,6 +95,11 @@ mkdirp-classic@^0.5.2:
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/mkdirp-classic/-/mkdirp-classic-0.5.3.tgz#fa10c9115cc6d8865be221ba47ee9bed78601113"
   integrity sha512-gKLcREMhtuZRwRAfqP3RFW+TK4JqApVBtOIftVgjuABpAtpxhPGaDcfvbhNvD0B8iD1oUr/txX35NjcaY6Ns/A==
+
+node-ratify@:
+  version "1.1.32"
+  resolved "https://registry.yarnpkg.com/node-ratify/-/node-ratify-1.1.32.tgz#3957837f2caed83bb61b9992db537d0521db2df5"
+  integrity sha1-OVeDfyyu2Du2G5mS21N9BSHbLfU=
 
 once@^1.3.1, once@^1.4.0:
   version "1.4.0"
