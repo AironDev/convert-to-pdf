@@ -10,7 +10,7 @@ const inputPath = path.join( '/opt', 'lo.tar.br');
 const outputPath = '/tmp/';
 const bucketName = process.env.SOURCE_BUCKET;
 
-module.exports.handler = async ({filename, event} ) => {
+module.exports.handler = async ({filename, Records} ) => {
 execSync('ls -alh /opt').toString('utf8');
   try {
     // Decompressing
@@ -29,8 +29,10 @@ execSync('ls -alh /opt').toString('utf8');
   }
 
   // get file from s3 bucketvd
-  if(event.Records){
-    var s3fileName = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, ' '));
+  if(Records){
+    console.log('Object Event running ' + Records); 
+    var records = Records
+    var s3fileName = decodeURIComponent( records[0].s3.object.key.replace(/\+/g, ' '));
     console.log('Object Event running ' + s3fileName); 
   }else{
     var s3fileName = filename;
