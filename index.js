@@ -10,7 +10,7 @@ const inputPath = path.join( '/opt', 'lo.tar.br');
 const outputPath = '/tmp/';
 const bucketName = process.env.SOURCE_BUCKET;
 
-module.exports.handler = async ({filename}, event) => {
+module.exports.handler = async ({filename, event} ) => {
 execSync('ls -alh /opt').toString('utf8');
   try {
     // Decompressing
