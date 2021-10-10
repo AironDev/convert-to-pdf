@@ -35,6 +35,7 @@ execSync('ls -alh /opt').toString('utf8');
   }else{
     var s3fileName = filename;
     console.log('Manual event triggered ' + s3fileName); 
+    console.log(event)
   }
   
   console.log('s3 bucket file name from event:', s3fileName);
