@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-const watermark = require('image-watermark');
 var async = require('async');
 const {writeFileSync} = require('fs');
 const lambdafs = require('lambdafs');
@@ -100,11 +99,11 @@ execSync('ls -alh /opt').toString('utf8');
     let fileB64data = fs.readFileSync('/tmp/'+fileParts);
 
     // add watermark
-    try{
-        watermark.embedWatermark('/tmp/'+fileParts, {'text': 'downloaded from authoran.com'});
-    }catch(e){
-      console.log("unable to add watermark", e)
-    }
+    // try{
+    //     watermark.embedWatermark('/tmp/'+fileParts, {'text': 'downloaded from authoran.com'});
+    // }catch(e){
+    //   console.log("unable to add watermark", e)
+    // }
 
     if(returnRaw){
       return fileB64data
