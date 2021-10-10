@@ -30,7 +30,7 @@ execSync('ls -alh /opt').toString('utf8');
 
   // get file from s3 bucketvd
   if(Records){
-    console.log('Object Event running ' + Records).toString('utf8'); 
+    console.log('Object Event running ' + Records.toString('utf8')); 
     var records = Records
     var s3fileName = decodeURIComponent( records[0].s3.object.key.replace(/\+/g, ' '));
     console.log('Object Event running ' + s3fileName); 
