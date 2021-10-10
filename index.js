@@ -41,7 +41,7 @@ execSync('ls -alh /opt').toString('utf8');
   
   var newFileName = Date.now()+'.pdf';
   const s3 = new S3();
-  // var fileStream = fs.createWriteStream('/tmp/'+s3fileName);
+  var fileStream = fs.createWriteStream('/tmp/'+s3fileName);
   var getObject = function(keyFile) {
       return new Promise(function(success, reject) {
           s3.getObject(
@@ -68,8 +68,9 @@ execSync('ls -alh /opt').toString('utf8');
     // execute file conversion
     const convertCommand = `export HOME=/tmp && /tmp/lo/instdir/program/soffice.bin --headless --norestore --invisible --nodefault --nofirststartwizard --nolockcheck --nologo --convert-to "pdf:writer_pdf_Export" --outdir /tmp /tmp/${s3fileName}`;
     try {
-      execSync(convertCommand).toString('utf8');
+      console.log(execSync(convertCommand).toString('utf8'));
     } catch (e) {
+      console.log(execSync(convertCommand).toString('utf8'));
       console.log('Error occurred while converting document ' + e);
     }
     // console log  contents of /tmp
