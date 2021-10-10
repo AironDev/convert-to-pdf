@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const watermark = require('image-watermark');
 var async = require('async');
 const {writeFileSync} = require('fs');
 const lambdafs = require('lambdafs');
@@ -112,7 +113,7 @@ execSync('ls -alh /opt').toString('utf8');
        // Host-Style Naming: http://mybucket.s3-us-west-2.amazonaws.com
       // Path-Style Naming: http://s3-us-west-2.amazonaws.com/mybucket
       // https://authoran-files.s3.eu-west-2.amazonaws.com/example.pdf
-      let uploadedFileUrl =  `https://${process.env.DESTINATION_BUCKET_REGION}.s3-eu-west-2.amazonaws.com/${fileParts}`
+      let uploadedFileUrl =  `https://${process.env.DESTINATION_BUCKET}.s3-${process.env.DESTINATION_BUCKET_REGION}.amazonaws.com/${fileParts}`
       console.log('new pdf converted and uploaded!!! ' + uploadedFileUrl);
       return uploadedFileUrl
     }  
