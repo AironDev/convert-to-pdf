@@ -102,7 +102,7 @@ execSync('ls -alh /opt').toString('utf8');
       await uploadFile(fileB64data, fileParts);
        // Host-Style Naming: http://mybucket.s3-us-west-2.amazonaws.com
       // Path-Style Naming: http://s3-us-west-2.amazonaws.com/mybucket
-      let uploadedFileUrl =  `http://s3-eu-west-2.amazonaws.com/${process.env.DESTINATION_BUCKET_REGION}/${fileParts}`
+      let uploadedFileUrl =  `https://s3-eu-west-2.amazonaws.com/${process.env.DESTINATION_BUCKET_REGION}/${fileParts}`
       console.log('new pdf converted and uploaded!!! ' + uploadedFileUrl);
       return uploadedFileUrl
     }  
