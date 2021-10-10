@@ -17,7 +17,7 @@ execSync('ls -alh /opt').toString('utf8');
     let decompressed = {
       file: await lambdafs.inflate(inputPath)
     };
-    console.log('Error brotli decompressed'); 
+    console.log('Success brotli decompressed'); 
   } catch (error) {
     console.log('Error brotli de:----', error);
   }
