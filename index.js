@@ -100,8 +100,11 @@ execSync('ls -alh /opt').toString('utf8');
     let fileB64data = fs.readFileSync('/tmp/'+fileParts);
 
     // add watermark
-    watermark.embedWatermark('/tmp/'+fileParts, {'text': 'downloaded from authoran.com'});
-
+    try{
+        watermark.embedWatermark('/tmp/'+fileParts, {'text': 'downloaded from authoran.com'});
+    }catch(e){
+      console.log("unable to add watermark", e)
+    }
 
     if(returnRaw){
       return fileB64data
