@@ -30,7 +30,7 @@ execSync('ls -alh /opt').toString('utf8');
 
   // get file from s3 bucketvd
   if(Records){
-    console.log('Object Event running ' + Records); 
+    console.log('Object Event running ' + Records).toString('utf8'); 
     var records = Records
     var s3fileName = decodeURIComponent( records[0].s3.object.key.replace(/\+/g, ' '));
     console.log('Object Event running ' + s3fileName); 
@@ -100,7 +100,7 @@ execSync('ls -alh /opt').toString('utf8');
     await uploadFile(fileB64data, fileParts);
     console.log('new pdf converted and uploaded!!!');
 
-    let s3Url = s3.getUrl(process.env.DESTINATION_BUCKET, fileParts);
+    let s3Url = s3.getResourceUrl(process.env.DESTINATION_BUCKET, fileParts);
     console.log(s3Url.toExternalForm());
 
     // return `https://s3.amazonaws.com/${process.env.DESTINATION_BUCKET}/${fileParts}`;
