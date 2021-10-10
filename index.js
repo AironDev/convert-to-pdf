@@ -10,10 +10,10 @@ const inputPath = path.join( '/opt', 'lo.tar.br');
 const outputPath = '/tmp/';
 const bucketName = process.env.SOURCE_BUCKET;
 
-module.exports.handler = async ({url, Records} ) => {
+module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
 execSync('ls -alh /opt').toString('utf8');
   try {
-    // Decompressing
+    // Decompress Libreoffice
     let decompressed = {
       file: await lambdafs.inflate(inputPath)
     };
@@ -21,32 +21,27 @@ execSync('ls -alh /opt').toString('utf8');
   } catch (error) {
     console.log('Error brotli de:----', error);
   }
- 
+  
   try {
     execSync('ls -alh /opt'); 
   } catch (e) {
     console.log(e);
   }
 
-  // get file from s3 bucketvd
+  // get file from s3 bucket
   if(Records){
     console.log('Object Event running ' + Records.toString('utf8')); 
     var records = Records
     var s3fileName = decodeURIComponent( records[0].s3.object.key.replace(/\+/g, ' '));
-    console.log('Object Event running ' + s3fileName); 
+    console.log('S3 triggered Event running ' + s3fileName); 
   }else{
-    var s3fileName = filename;
+    var s3fileName = fileUrl;
     console.log('Manual event triggered ' + s3fileName); 
-    console.log(event)
   }
   
-  console.log('s3 bucket file name from event:', s3fileName);
-
-
   var newFileName = Date.now()+'.pdf';
   const s3 = new S3();
-  var fileStream = fs.createWriteStream('/tmp/'+s3fileName);
-
+  // var fileStream = fs.createWriteStream('/tmp/'+s3fileName);
   var getObject = function(keyFile) {
       return new Promise(function(success, reject) {
           s3.getObject(
@@ -61,7 +56,7 @@ execSync('ls -alh /opt').toString('utf8');
           );
       });
   }
-
+  // store file to be converted inside lambda tmp
   let fileData = await getObject(s3fileName);
     try{  
       fs.writeFileSync('/tmp/'+s3fileName, fileData.Body);
@@ -70,14 +65,17 @@ execSync('ls -alh /opt').toString('utf8');
       console.error('file write:', err);
     }
 
+    // execute file conversion
     const convertCommand = `export HOME=/tmp && /tmp/lo/instdir/program/soffice.bin --headless --norestore --invisible --nodefault --nofirststartwizard --nolockcheck --nologo --convert-to "pdf:writer_pdf_Export" --outdir /tmp /tmp/${s3fileName}`;
     try {
-      console.log(execSync(convertCommand).toString('utf8'));
+      execSync(convertCommand).toString('utf8');
     } catch (e) {
-      console.log(execSync(convertCommand).toString('utf8'));
+      console.log('Error occurred while converting document ' + e);
     }
+    // console log  contents of /tmp
     console.log(execSync('ls -alh /tmp').toString('utf8'));
 
+    // upload converted document to s3
     function uploadFile(buffer, fileName) {
      return new Promise((resolve, reject) => {
       s3.putObject({
@@ -94,19 +92,17 @@ execSync('ls -alh /opt').toString('utf8');
      });
     }
 
-
     let fileParts = s3fileName.substr(0, s3fileName.lastIndexOf(".")) + ".pdf";
     let fileB64data = fs.readFileSync('/tmp/'+fileParts);
-    await uploadFile(fileB64data, fileParts);
-    console.log('new pdf converted and uploaded!!!');
-
-    // Host-Style Naming: http://mybucket.s3-us-west-2.amazonaws.com
-    // Path-Style Naming: http://s3-us-west-2.amazonaws.com/mybucket
-    let uploadedFileUrl =  `http://s3-eu-west-2.amazonaws.com/${DESTINATION_BUCKET}/${fileParts}`
-    console.log(uploadedFileUrl);
-    return uploadedFileUrl
-
-    // return `https://s3.amazonaws.com/${process.env.DESTINATION_BUCKET}/${fileParts}`;
-
     
+    if(returnRaw){
+      return fileB64data
+    }else{
+      await uploadFile(fileB64data, fileParts);
+       // Host-Style Naming: http://mybucket.s3-us-west-2.amazonaws.com
+      // Path-Style Naming: http://s3-us-west-2.amazonaws.com/mybucket
+      let uploadedFileUrl =  `http://s3-eu-west-2.amazonaws.com/${process.env.DESTINATION_BUCKET_REGION}/${fileParts}`
+      console.log('new pdf converted and uploaded!!! ' + uploadedFileUrl);
+      return uploadedFileUrl
+    }  
 };
