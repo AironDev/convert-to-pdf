@@ -26,6 +26,7 @@ execSync('ls -alh /opt').toString('utf8');
   try {
     // console log  contents of /opt
     console.log(execSync('ls -alh /opt').toString('utf8'));
+    console.log(execSync('ls -alh /bin').toString('utf8'));
   } catch (e) {
     console.log(e);
   }
