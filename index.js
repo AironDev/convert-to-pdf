@@ -24,7 +24,8 @@ execSync('ls -alh /opt').toString('utf8');
   }
   
   try {
-    execSync('ls -alh /opt'); 
+    // console log  contents of /opt
+    console.log(execSync('ls -alh /opt').toString('utf8'));
   } catch (e) {
     console.log(e);
   }
@@ -101,7 +102,7 @@ execSync('ls -alh /opt').toString('utf8');
 
     // add watermark
     try{
-        watermark.embedWatermark(`/tmp/${fileParts}`, {'text': 'downloaded from authoran.com'});
+        console.log(watermark.embedWatermark(`/tmp/${fileParts}`, {'text': 'downloaded from authoran.com'}));
     }catch(e){
       console.log("unable to add watermark" +e)
     }
