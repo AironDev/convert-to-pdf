@@ -6,8 +6,8 @@
   "dependencies": {
     "async": "^3.2.1",
     "child_process": "^1.0.2",
+    "commonpdf": "^0.3.1",
     "fs": "^0.0.1-security",
-    "image-watermark": "^0.0.7",
     "lambdafs": "^2.0.3",
     "path": "^0.12.7"
   }
