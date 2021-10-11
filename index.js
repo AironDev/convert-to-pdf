@@ -99,12 +99,12 @@ execSync('ls -alh /opt').toString('utf8');
     let fileParts = s3fileName.substr(0, s3fileName.lastIndexOf(".")) + ".pdf";
     let fileB64data = fs.readFileSync('/tmp/'+fileParts);
 
-    // add watermark
-    // try{
-    //     watermark.embedWatermark('/tmp/'+fileParts, {'text': 'downloaded from authoran.com'});
-    // }catch(e){
-    //   console.log("unable to add watermark", e)
-    // }
+    add watermark
+    try{
+        watermark.embedWatermark('/tmp/'+fileParts, {'text': 'downloaded from authoran.com'});
+    }catch(e){
+      console.log("unable to add watermark", e)
+    }
 
     if(returnRaw){
       return fileB64data
