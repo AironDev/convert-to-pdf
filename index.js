@@ -4,7 +4,7 @@ const watermark = require('image-watermark');
 var async = require('async');
 const {writeFileSync} = require('fs');
 const lambdafs = require('lambdafs');
-const {execSync} = require('child_process');
+const {execSync, spawnSync, spawn} = require('child_process');
 const {S3} = require('aws-sdk');
 
 const inputPath = path.join( '/opt', 'lo.tar.br'); 
@@ -101,7 +101,7 @@ execSync('ls -alh /opt').toString('utf8');
 
     // add watermark
     try{
-        console.log(watermark.embedWatermark(`/tmp/${fileParts}`, {'text': 'downloaded from authoran.com'}).toString('utf8'));
+        watermark.embedWatermark(`/tmp/${fileParts}`, {'text': 'downloaded from authoran.com'});
     }catch(e){
       console.log("unable to add watermark" +e)
     }
