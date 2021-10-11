@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-const watermark = require('image-watermark');
 var async = require('async');
 const {writeFileSync} = require('fs');
 const lambdafs = require('lambdafs');
@@ -23,14 +22,6 @@ execSync('ls -alh /opt').toString('utf8');
     console.log('Error brotli de:----', error);
   }
   
-  try {
-    // console log  contents of /opt
-    console.log(execSync('ls -alh /opt').toString('utf8'));
-    console.log(execSync('ls -alh /bin').toString('utf8'));
-  } catch (e) {
-    console.log(e);
-  }
-
   // get file from s3 bucket
   if(Records){
     console.log('Object Event running ' + Records.toString('utf8')); 
