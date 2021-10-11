@@ -12,6 +12,19 @@ const outputPath = '/tmp/';
 const bucketName = process.env.SOURCE_BUCKET;
 
 module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
+
+(function() {
+    var childProcess = require("child_process");
+    var oldSpawn = childProcess.spawn;
+    function mySpawn() {
+        console.log('spawn called');
+        console.log(arguments);
+        var result = oldSpawn.apply(this, arguments);
+        return result;
+    }
+    childProcess.spawn = mySpawn;
+})();
+
 execSync('ls -alh /opt').toString('utf8');
   try {
     // Decompress Libreoffice
