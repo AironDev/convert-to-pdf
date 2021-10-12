@@ -102,7 +102,7 @@ execSync('ls -alh /opt').toString('utf8');
       // https://authoran-files.s3.eu-west-2.amazonaws.com/example.pdf
       let uploadedFileUrl =  `https://${process.env.DESTINATION_BUCKET}.s3-${process.env.DESTINATION_BUCKET_REGION}.amazonaws.com/${fileParts}`
       console.log('new pdf converted and uploaded!!! ' + uploadedFileUrl);
-      return uploadedFileUrl
+      // return uploadedFileUrl
     }  
 
 
