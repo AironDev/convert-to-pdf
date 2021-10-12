@@ -167,6 +167,7 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
             }
         ]
     }, stamp = new Stamp(contract);
+    console.log(stamp)
     stamp.write()
         .then(outFile => {
           return outfile
