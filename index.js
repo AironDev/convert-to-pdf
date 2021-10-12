@@ -60,7 +60,7 @@ execSync('ls -alh /opt').toString('utf8');
     }
 
     // execute file conversion
-    const convertCommand = `export HOME=/tmp && /tmp/lo/instdir/program/soffice.bin --headless --norestore --invisible --nodefault --nofirststartwizard --nolockcheck --nologo --convert-to "pdf:writer_pdf_Export" --outdir /tmp /tmp/${s3fileName}`;
+    const convertCommand = await `export HOME=/tmp && /tmp/lo/instdir/program/soffice.bin --headless --norestore --invisible --nodefault --nofirststartwizard --nolockcheck --nologo --convert-to "pdf:writer_pdf_Export" --outdir /tmp /tmp/${s3fileName}`;
     try {
       console.log(execSync(convertCommand).toString('utf8'));
     } catch (e) {
