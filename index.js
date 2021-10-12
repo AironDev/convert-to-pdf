@@ -169,14 +169,15 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
     }, stamp = new Stamp(contract);
     stamp.write()
         .then(outFile => {
-        t.plan(6);
-        ['/tmp/fw9-pg_1.pdf', '/tmp/fw9-pg_2.pdf', '/tmp/fw9-pg_3.pdf', '/tmp/fw9-pg_4.pdf'].forEach(page => {
-            t.false(fs_1.existsSync(page), 'Pages should be cleaned up at end of process.');
-        });
-        t.ok(outFile);
-        fs_1.exists(outFile, exists => {
-            t.true(exists);
-        });
+          return outfile
+        // t.plan(6);
+        // ['/tmp/fw9-pg_1.pdf', '/tmp/fw9-pg_2.pdf', '/tmp/fw9-pg_3.pdf', '/tmp/fw9-pg_4.pdf'].forEach(page => {
+        //     t.false(fs_1.existsSync(page), 'Pages should be cleaned up at end of process.');
+        // });
+        // t.ok(outFile);
+        // fs_1.exists(outFile, exists => {
+        //     t.true(exists);
+        // });
     }).catch((err) => {
         console.log(err);
     });
@@ -185,7 +186,7 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
     }catch(e){
       console.log("unable to add watermark" +e)
     }
-    
+
 };
 
   // console.log(fs.readFileSync(path.join(__dirname, '/tmp/example.pdf')));
