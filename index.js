@@ -4,7 +4,7 @@ var async = require('async');
 const {writeFileSync} = require('fs');
 const lambdafs = require('lambdafs');
 const {execSync, spawnSync, spawn} = require('child_process');
-// const {S3} = require('aws-sdk');
+const {S3} = require('aws-sdk');
 
 const inputPath = path.join( '/opt', 'lo.tar.br'); 
 const outputPath = '/tmp/';
