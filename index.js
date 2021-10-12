@@ -143,6 +143,7 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
         //     page: 1
         // }, stamp = new Stamp(contract);
 
+        execSync('ls -alh /opt').toString('utf8');
 
         let contract = {
         file: path.join(__dirname, '/tmp/example.pdf'),
@@ -179,8 +180,10 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
         // fs_1.exists(outFile, exists => {
         //     t.true(exists);
         // });
+        execSync('ls -alh /opt').toString('utf8');
     }).catch((err) => {
-        console.log(err);
+        execSync('ls -alh /opt').toString('utf8');
+        console.log('error ph' + err);
     });
 
 
