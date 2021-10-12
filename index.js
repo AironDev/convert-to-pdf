@@ -121,17 +121,19 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
   // pdftk myoldfile.pdf cat 1-2 4-5 output mynewfile.pdf
   const NUMBEROFPAGES = (execSync(`pdftk ${fileData} dump_data | grep NumberOfPages | awk '{print $2} `).toString('utf8'));
   console.log(NUMBEROFPAGES)
-  // execSync(`pdftk tmp/in.pdf stamp  tmp/back.pdf output tmp/out.pdf`, (error, stdout, stderr) => {
-  //     if (error || stderr)
-  //         reject(error);
-  //     else
-  //         fulfill(placeholderStampPdf);
-  // });
+  execSync(`pdftk ${fileData} stamp  ${fileData} output tmp/outed.pdf`, (error, stdout, stderr) => {
+      if (error || stderr)
+          reject(error);
+      else
+          fulfill(placeholderStampPdf);
+  });
 
   }catch(e){
     console.log("unable to add watermark" +e)
   }
 
+  // console log  contents of /tmp
+  console.log(execSync('ls -alh /tmp').toString('utf8'));
 
 };
 
