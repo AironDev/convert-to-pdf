@@ -135,18 +135,18 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
 
 
 
-  let fileB64data = fs.readFileSync(convertedFile);
+  let fileB64data = fs.readFileSync(stampedFile);
   console.log(stampedFile)
 
 
   if(returnRaw){
       return fileB64data
     }else{
-      await uploadFile(fileB64data, stampedFile);
+      await uploadFile(fileB64data, 'stampedFile.pdf');
        // Host-Style Naming: http://mybucket.s3-us-west-2.amazonaws.com
       // Path-Style Naming: http://s3-us-west-2.amazonaws.com/mybucket
       // https://authoran-files.s3.eu-west-2.amazonaws.com/example.pdf
-      let uploadedFileUrl =  `https://${process.env.DESTINATION_BUCKET}.s3-${process.env.DESTINATION_BUCKET_REGION}.amazonaws.com/${fileParts}`
+      // let uploadedFileUrl =  `https://${process.env.DESTINATION_BUCKET}.s3-${process.env.DESTINATION_BUCKET_REGION}.amazonaws.com/${fileParts}`
       console.log('new pdf converted and uploaded!!! ' + uploadedFileUrl);
       // return uploadedFileUrl
     }
