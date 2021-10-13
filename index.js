@@ -109,6 +109,7 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
       // return uploadedFileUrl
     }
 
+
   try{
   // use stamp to cover the content completely
   // use background to add the back.pdf as background to pdf
@@ -125,19 +126,19 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
   // let fileData = 'tmp/in.pdf'
   const numberOfPages = (execSync(`pdftk ${fileData} dump_data | grep NumberOfPages | awk '{print $2}' `).toString('utf8'));
   console.log(numberOfPages)
-  // execSync(`pdftk ${fileData} stamp  ${fileData} output tmp/outed.pdf`, (error, stdout, stderr) => {
-  //     if (error || stderr)
-  //         reject(error);
-  //     else
-  //         fulfill(placeholderStampPdf);
-  // });
+  execSync(`pdftk ${fileData} stamp  ${fileData} output tmp/outed.pdf`, (error, stdout, stderr) => {
+      if (error || stderr)
+          reject(error);
+      else
+          fulfill(placeholderStampPdf);
+  });
   return numberOfPages
   }catch(e){
     console.log("unable to add watermark" +e)
   }
 
   // console log  contents of /tmp
-  // console.log(execSync('ls -alh /tmp').toString('utf8'));
+  console.log(execSync('ls -alh /tmp').toString('utf8'));
 
 };
 
