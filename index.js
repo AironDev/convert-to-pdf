@@ -95,12 +95,11 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
      });
     }
 
-    let fileParts = s3fileName.substr(0, s3fileName.lastIndexOf(".")) + ".pdf";
-    let fileB64data = fs.readFileSync('/tmp/'+fileParts);
-    console.log(fileParts)
+   
 
 
-    
+  let fileParts = s3fileName.substr(0, s3fileName.lastIndexOf(".")) + ".pdf";
+
 
   try{
   // use stamp to cover the content completely
@@ -133,6 +132,10 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
   console.log(execSync('ls -alh /tmp').toString('utf8'));
 
 
+
+
+  let fileB64data = fs.readFileSync('/tmp/'+fileParts);
+  console.log(fileParts)
 
 
   if(returnRaw){
