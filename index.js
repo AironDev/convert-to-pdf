@@ -98,7 +98,8 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
    
 
 
-  let fileParts = s3fileName.substr(0, s3fileName.lastIndexOf(".")) + ".pdf";
+  let convertedFile = '/tmp/'+s3fileName.substr(0, s3fileName.lastIndexOf(".")) + ".pdf";
+  let stampedFile = '/tmp/'+s3fileName.substr(0, s3fileName.lastIndexOf(".")) + "_stamped.pdf";
 
 
   try{
@@ -115,9 +116,9 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
   // if you want to extract a range:
   // pdftk myoldfile.pdf cat 1-2 4-5 output mynewfile.pdf
   // let fileData = 'tmp/in.pdf'
-  const numberOfPages = (execSync(`pdftk /tmp/${fileParts} dump_data | grep NumberOfPages | awk '{print $2}' `).toString('utf8'));
+  const numberOfPages = (execSync(`pdftk ${convertedFile} dump_data | grep NumberOfPages | awk '{print $2}' `).toString('utf8'));
   console.log(numberOfPages)
-  execSync(`pdftk /tmp/${fileParts} stamp /tmp/stamp.pdf output /tmp/watermark/${fileParts}`, (error, stdout, stderr) => {
+  execSync(`pdftk ${convertedFile} stamp /tmp/stamp.pdf output ${stampedFile}`, (error, stdout, stderr) => {
       if (error || stderr)
           reject(error);
       else
@@ -134,14 +135,14 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
 
 
 
-  let fileB64data = fs.readFileSync('/tmp/watermark/'+fileParts);
-  console.log(fileParts)
+  let fileB64data = fs.readFileSync(convertedFile);
+  console.log(stampedFile)
 
 
   if(returnRaw){
       return fileB64data
     }else{
-      await uploadFile(fileB64data, fileParts);
+      await uploadFile(fileB64data, stampedFile);
        // Host-Style Naming: http://mybucket.s3-us-west-2.amazonaws.com
       // Path-Style Naming: http://s3-us-west-2.amazonaws.com/mybucket
       // https://authoran-files.s3.eu-west-2.amazonaws.com/example.pdf
