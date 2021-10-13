@@ -95,6 +95,7 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
 
     let fileParts = s3fileName.substr(0, s3fileName.lastIndexOf(".")) + ".pdf";
     let fileB64data = fs.readFileSync('/tmp/'+fileParts);
+    console.log(fileParts)
 
 
     if(returnRaw){
@@ -126,7 +127,7 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
   // let fileData = 'tmp/in.pdf'
   const numberOfPages = (execSync(`pdftk ${fileData} dump_data | grep NumberOfPages | awk '{print $2}' `).toString('utf8'));
   console.log(numberOfPages)
-  execSync(`pdftk ${fileData} stamp  ${fileData} output tmp/outed.pdf`, (error, stdout, stderr) => {
+  execSync(`pdftk /tmp/${fileParts} stamp /tmp/${fileParts} output tmp/outed.pdf`, (error, stdout, stderr) => {
       if (error || stderr)
           reject(error);
       else
