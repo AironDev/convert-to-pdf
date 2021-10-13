@@ -109,38 +109,6 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
       // return uploadedFileUrl
     }
 
-
-  // try{
-  // // use stamp to cover the content completely
-  // // use background to add the back.pdf as background to pdf
-
-  // // Remove page 13 from in1.pdf to create out1.pdf
-  // // pdftk in.pdf cat 1-12 14-end output out1.pdf
-  // // or: pdftk A=in1.pdf cat A1-12 A14-end output out1.pdf
-
-  // // if you want to extract random pages:
-  // // pdftk myoldfile.pdf cat 1 2 4 5 output mynewfile.pdf
-
-  // // if you want to extract a range:
-  // // pdftk myoldfile.pdf cat 1-2 4-5 output mynewfile.pdf
-  // const NUMBEROFPAGES = (execSync(`pdftk ${fileData} dump_data | grep NumberOfPages | awk '{print $2} `).toString('utf8'));
-  // console.log(NUMBEROFPAGES)
-  // execSync(`pdftk ${fileData} stamp  ${fileData} output tmp/outed.pdf`, (error, stdout, stderr) => {
-  //     if (error || stderr)
-  //         reject(error);
-  //     else
-  //         fulfill(placeholderStampPdf);
-  // });
-
-  // }catch(e){
-  //   console.log("unable to add watermark" +e)
-  // }
-
-  // // console log  contents of /tmp
-  // console.log(execSync('ls -alh /tmp').toString('utf8'));
-
-
-
   try{
   // use stamp to cover the content completely
   // use background to add the back.pdf as background to pdf
@@ -172,34 +140,4 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
   // console.log(execSync('ls -alh /tmp').toString('utf8'));
 
 };
-
-// try{
-  // use stamp to cover the content completely
-  // use background to add the back.pdf as background to pdf
-
-  // Remove page 13 from in1.pdf to create out1.pdf
-  // pdftk in.pdf cat 1-12 14-end output out1.pdf
-  // or: pdftk A=in1.pdf cat A1-12 A14-end output out1.pdf
-
-  // if you want to extract random pages:
-  // pdftk myoldfile.pdf cat 1 2 4 5 output mynewfile.pdf
-
-  // if you want to extract a range:
-  // // pdftk myoldfile.pdf cat 1-2 4-5 output mynewfile.pdf
-  // let fileData = 'tmp/in.pdf'
-  // const numberOfPages = (execSync(`pdftk ${fileData} dump_data | grep NumberOfPages | awk '{print $2}' `).toString('utf8'));
-  // console.log(numberOfPages)
-  // // execSync(`pdftk ${fileData} stamp  ${fileData} output tmp/outed.pdf`, (error, stdout, stderr) => {
-  // //     if (error || stderr)
-  // //         reject(error);
-  // //     else
-  // //         fulfill(placeholderStampPdf);
-  // // });
-  // return numberOfPages
-  // }catch(e){
-  //   console.log("unable to add watermark" +e)
-  // }
-
-  // // console log  contents of /tmp
-  // // console.log(execSync('ls -alh /tmp').toString('utf8'));
 
