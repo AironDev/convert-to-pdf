@@ -1,0 +1,120 @@
+NumberOfPages: 12
+---
+AnnotSubtype: Link
+AnnotRect: 200.763 761.45 335.267 769.401
+AnnotPageNumber: 1
+AnnotActionSubtype: URI
+AnnotActionURI: https://www.researchgate.net/publication/340581787_Calculation_of_Fast_neutron_Removal_Cross-section_and_Gamma_ray_Attenuation_for_New_composite_Paste_Shields?enrichId=rgreq-9e0266e79b73b9cff512e4677df1ec0d-XXX&amp;enrichSource=Y292ZXJQYWdlOzM0MDU4MTc4NztBUzo4NzkyNDc5NzEzMTk4MDlAMTU4NjY0MDQ2MDY3Mw%3D%3D&amp;el=1_x_2&amp;_esc=publicationCoverPdf
+AnnotActionIsMap: false
+---
+AnnotSubtype: Link
+AnnotRect: 39.755 710.431 555.245 750.186
+AnnotPageNumber: 1
+AnnotActionSubtype: URI
+AnnotActionURI: https://www.researchgate.net/publication/340581787_Calculation_of_Fast_neutron_Removal_Cross-section_and_Gamma_ray_Attenuation_for_New_composite_Paste_Shields?enrichId=rgreq-9e0266e79b73b9cff512e4677df1ec0d-XXX&amp;enrichSource=Y292ZXJQYWdlOzM0MDU4MTc4NztBUzo4NzkyNDc5NzEzMTk4MDlAMTU4NjY0MDQ2MDY3Mw%3D%3D&amp;el=1_x_3&amp;_esc=publicationCoverPdf
+AnnotActionIsMap: false
+---
+AnnotSubtype: Link
+AnnotRect: 100.05 460.637 133.842 469.913
+AnnotPageNumber: 1
+AnnotActionSubtype: URI
+AnnotActionURI: https://www.researchgate.net/project/contrast?enrichId=rgreq-9e0266e79b73b9cff512e4677df1ec0d-XXX&amp;enrichSource=Y292ZXJQYWdlOzM0MDU4MTc4NztBUzo4NzkyNDc5NzEzMTk4MDlAMTU4NjY0MDQ2MDY3Mw%3D%3D&amp;el=1_x_9&amp;_esc=publicationCoverPdf
+AnnotActionIsMap: false
+---
+AnnotSubtype: Link
+AnnotRect: 335.267 430.821 369.722 440.097
+AnnotPageNumber: 1
+AnnotActionSubtype: URI
+AnnotActionURI: https://www.researchgate.net/project/Ultrasensitive-Laser-Spectroscopy-Based-On-Mid-IR-Frequency-Comb-Laser-For-Breath-Analysis?enrichId=rgreq-9e0266e79b73b9cff512e4677df1ec0d-XXX&amp;enrichSource=Y292ZXJQYWdlOzM0MDU4MTc4NztBUzo4NzkyNDc5NzEzMTk4MDlAMTU4NjY0MDQ2MDY3Mw%3D%3D&amp;el=1_x_9&amp;_esc=publicationCoverPdf
+AnnotActionIsMap: false
+---
+AnnotSubtype: Link
+AnnotRect: 492.962 795.242 564.521 807.831
+AnnotPageNumber: 1
+AnnotActionSubtype: URI
+AnnotActionURI: https://www.researchgate.net/?enrichId=rgreq-9e0266e79b73b9cff512e4677df1ec0d-XXX&amp;enrichSource=Y292ZXJQYWdlOzM0MDU4MTc4NztBUzo4NzkyNDc5NzEzMTk4MDlAMTU4NjY0MDQ2MDY3Mw%3D%3D&amp;el=1_x_1&amp;_esc=publicationCoverPdf
+AnnotActionIsMap: false
+---
+AnnotSubtype: Link
+AnnotRect: 39.755 606.405 59.6325 629.596
+AnnotPageNumber: 1
+AnnotActionSubtype: URI
+AnnotActionURI: https://www.researchgate.net/profile/Nesreen-Elwahab?enrichId=rgreq-9e0266e79b73b9cff512e4677df1ec0d-XXX&amp;enrichSource=Y292ZXJQYWdlOzM0MDU4MTc4NztBUzo4NzkyNDc5NzEzMTk4MDlAMTU4NjY0MDQ2MDY3Mw%3D%3D&amp;el=1_x_4&amp;_esc=publicationCoverPdf
+AnnotActionIsMap: false
+---
+AnnotSubtype: Link
+AnnotRect: 66.2583 620.982 133.179 629.596
+AnnotPageNumber: 1
+AnnotActionSubtype: URI
+AnnotActionURI: https://www.researchgate.net/profile/Nesreen-Elwahab?enrichId=rgreq-9e0266e79b73b9cff512e4677df1ec0d-XXX&amp;enrichSource=Y292ZXJQYWdlOzM0MDU4MTc4NztBUzo4NzkyNDc5NzEzMTk4MDlAMTU4NjY0MDQ2MDY3Mw%3D%3D&amp;el=1_x_5&amp;_esc=publicationCoverPdf
+AnnotActionIsMap: false
+---
+AnnotSubtype: Link
+AnnotRect: 66.2583 579.902 109.326 593.816
+AnnotPageNumber: 1
+AnnotActionSubtype: URI
+AnnotActionURI: https://www.researchgate.net/profile/Nesreen-Elwahab?enrichId=rgreq-9e0266e79b73b9cff512e4677df1ec0d-XXX&amp;enrichSource=Y292ZXJQYWdlOzM0MDU4MTc4NztBUzo4NzkyNDc5NzEzMTk4MDlAMTU4NjY0MDQ2MDY3Mw%3D%3D&amp;el=1_x_7&amp;_esc=publicationCoverPdf
+AnnotActionIsMap: false
+---
+AnnotSubtype: Link
+AnnotRect: 297.5 606.405 317.378 629.596
+AnnotPageNumber: 1
+AnnotActionSubtype: URI
+AnnotActionURI: https://www.researchgate.net/profile/Nadia-Helal-3?enrichId=rgreq-9e0266e79b73b9cff512e4677df1ec0d-XXX&amp;enrichSource=Y292ZXJQYWdlOzM0MDU4MTc4NztBUzo4NzkyNDc5NzEzMTk4MDlAMTU4NjY0MDQ2MDY3Mw%3D%3D&amp;el=1_x_4&amp;_esc=publicationCoverPdf
+AnnotActionIsMap: false
+---
+AnnotSubtype: Link
+AnnotRect: 324.003 620.982 355.807 629.596
+AnnotPageNumber: 1
+AnnotActionSubtype: URI
+AnnotActionURI: https://www.researchgate.net/profile/Nadia-Helal-3?enrichId=rgreq-9e0266e79b73b9cff512e4677df1ec0d-XXX&amp;enrichSource=Y292ZXJQYWdlOzM0MDU4MTc4NztBUzo4NzkyNDc5NzEzMTk4MDlAMTU4NjY0MDQ2MDY3Mw%3D%3D&amp;el=1_x_5&amp;_esc=publicationCoverPdf
+AnnotActionIsMap: false
+---
+AnnotSubtype: Link
+AnnotRect: 324.003 610.381 477.723 618.995
+AnnotPageNumber: 1
+AnnotActionSubtype: URI
+AnnotActionURI: https://www.researchgate.net/institution/Egyptian_Nuclear_and_Radiological_Regulatory_Authority?enrichId=rgreq-9e0266e79b73b9cff512e4677df1ec0d-XXX&amp;enrichSource=Y292ZXJQYWdlOzM0MDU4MTc4NztBUzo4NzkyNDc5NzEzMTk4MDlAMTU4NjY0MDQ2MDY3Mw%3D%3D&amp;el=1_x_6&amp;_esc=publicationCoverPdf
+AnnotActionIsMap: false
+---
+AnnotSubtype: Link
+AnnotRect: 324.003 579.902 367.071 593.816
+AnnotPageNumber: 1
+AnnotActionSubtype: URI
+AnnotActionURI: https://www.researchgate.net/profile/Nadia-Helal-3?enrichId=rgreq-9e0266e79b73b9cff512e4677df1ec0d-XXX&amp;enrichSource=Y292ZXJQYWdlOzM0MDU4MTc4NztBUzo4NzkyNDc5NzEzMTk4MDlAMTU4NjY0MDQ2MDY3Mw%3D%3D&amp;el=1_x_7&amp;_esc=publicationCoverPdf
+AnnotActionIsMap: false
+---
+AnnotSubtype: Link
+AnnotRect: 39.755 543.46 59.6325 566.65
+AnnotPageNumber: 1
+AnnotActionSubtype: URI
+AnnotActionURI: https://www.researchgate.net/profile/Tarek-Mohamed-3?enrichId=rgreq-9e0266e79b73b9cff512e4677df1ec0d-XXX&amp;enrichSource=Y292ZXJQYWdlOzM0MDU4MTc4NztBUzo4NzkyNDc5NzEzMTk4MDlAMTU4NjY0MDQ2MDY3Mw%3D%3D&amp;el=1_x_4&amp;_esc=publicationCoverPdf
+AnnotActionIsMap: false
+---
+AnnotSubtype: Link
+AnnotRect: 66.2583 558.037 110.651 566.65
+AnnotPageNumber: 1
+AnnotActionSubtype: URI
+AnnotActionURI: https://www.researchgate.net/profile/Tarek-Mohamed-3?enrichId=rgreq-9e0266e79b73b9cff512e4677df1ec0d-XXX&amp;enrichSource=Y292ZXJQYWdlOzM0MDU4MTc4NztBUzo4NzkyNDc5NzEzMTk4MDlAMTU4NjY0MDQ2MDY3Mw%3D%3D&amp;el=1_x_5&amp;_esc=publicationCoverPdf
+AnnotActionIsMap: false
+---
+AnnotSubtype: Link
+AnnotRect: 66.2583 516.957 109.326 530.871
+AnnotPageNumber: 1
+AnnotActionSubtype: URI
+AnnotActionURI: https://www.researchgate.net/profile/Tarek-Mohamed-3?enrichId=rgreq-9e0266e79b73b9cff512e4677df1ec0d-XXX&amp;enrichSource=Y292ZXJQYWdlOzM0MDU4MTc4NztBUzo4NzkyNDc5NzEzMTk4MDlAMTU4NjY0MDQ2MDY3Mw%3D%3D&amp;el=1_x_7&amp;_esc=publicationCoverPdf
+AnnotActionIsMap: false
+---
+AnnotSubtype: Link
+AnnotRect: 135.83 26.6448 166.971 33.2707
+AnnotPageNumber: 1
+AnnotActionSubtype: URI
+AnnotActionURI: https://www.researchgate.net/profile/Tarek-Mohamed-3?enrichId=rgreq-9e0266e79b73b9cff512e4677df1ec0d-XXX&amp;enrichSource=Y292ZXJQYWdlOzM0MDU4MTc4NztBUzo4NzkyNDc5NzEzMTk4MDlAMTU4NjY0MDQ2MDY3Mw%3D%3D&amp;el=1_x_10&amp;_esc=publicationCoverPdf
+AnnotActionIsMap: false
+---
+AnnotSubtype: Link
+AnnotRect: 47 3 95 10
+AnnotPageNumber: 12
+AnnotActionSubtype: URI
+AnnotActionURI: https://www.researchgate.net/publication/340581787
+AnnotActionIsMap: false
