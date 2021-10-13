@@ -680,6 +680,11 @@ pdfkit@^0.8.0:
     linebreak "^0.3.0"
     png-js ">=0.1.0"
 
+pdftk-lambda@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/pdftk-lambda/-/pdftk-lambda-0.0.5.tgz#092ec999ab0b904e0505efbc2a72e70e66875146"
+  integrity sha512-72kN8N7TtDo7COIMSRW4cJd7JQR0vubSB8Y/YlTpMLdRLvik3GycIvyaUtQWks1ghjQqpYpBbddQQQSe8pTjlQ==
+
 png-js@>=0.1.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/png-js/-/png-js-1.0.0.tgz#e5484f1e8156996e383aceebb3789fd75df1874d"

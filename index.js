@@ -7,6 +7,8 @@ const {execSync, spawnSync, spawn} = require('child_process');
 const {S3} = require('aws-sdk');
 const Stamp = require('commonpdf').Stamp
 const Commonpdf = require('commonpdf')
+require('pdftk-lambda')
+
 
 const inputPath = path.join( '/opt', 'lo.tar.br'); 
 const outputPath = '/tmp/';
