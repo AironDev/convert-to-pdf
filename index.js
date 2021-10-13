@@ -96,8 +96,6 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
     }
 
    
-
-
   let convertedFile = '/tmp/'+s3fileName.substr(0, s3fileName.lastIndexOf(".")) + ".pdf";
   let stampedFile = '/tmp/'+s3fileName.substr(0, s3fileName.lastIndexOf(".")) + "_stamped.pdf";
 
@@ -116,41 +114,36 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
   // if you want to extract a range:
   // pdftk myoldfile.pdf cat 1-2 4-5 output mynewfile.pdf
   // let fileData = 'tmp/in.pdf'
-  const numberOfPages = (execSync(`pdftk ${convertedFile} dump_data | grep NumberOfPages | awk '{print $2}' `).toString('utf8'));
-  console.log(numberOfPages)
+  // const numberOfPages = (execSync(`pdftk ${convertedFile} dump_data | grep NumberOfPages | awk '{print $2}' `).toString('utf8'));
+  // TODO - use numberOfPages to create sample files for a given pdf - use stored env percentage to split file
   execSync(`pdftk ${convertedFile} stamp /tmp/stamp.pdf output ${stampedFile}`, (error, stdout, stderr) => {
       if (error || stderr)
           reject(error);
       else
           fulfill(placeholderStampPdf);
   });
-  // return numberOfPages
   }catch(e){
     console.log("unable to add watermark" +e)
   }
 
   // console log  contents of /tmp
-  console.log(execSync('ls -alh /tmp').toString('utf8'));
-
-
-
-
+  // console.log(execSync('ls -alh /tmp').toString('utf8'));
+  
+  // get stamped data
   let fileB64data = fs.readFileSync(stampedFile);
-  console.log(stampedFile)
 
-
+  // uploaded converted and stamped file
   if(returnRaw){
       return fileB64data
     }else{
-      await uploadFile(fileB64data, 'stampedFile.pdf');
+      await uploadFile(fileB64data, s3fileName);
        // Host-Style Naming: http://mybucket.s3-us-west-2.amazonaws.com
       // Path-Style Naming: http://s3-us-west-2.amazonaws.com/mybucket
       // https://authoran-files.s3.eu-west-2.amazonaws.com/example.pdf
-      // let uploadedFileUrl =  `https://${process.env.DESTINATION_BUCKET}.s3-${process.env.DESTINATION_BUCKET_REGION}.amazonaws.com/${fileParts}`
+      let uploadedFileUrl =  `https://${process.env.DESTINATION_BUCKET}.s3-${process.env.DESTINATION_BUCKET_REGION}.amazonaws.com/${s3fileName}`
       console.log('new pdf converted and uploaded!!! ' + uploadedFileUrl);
       // return uploadedFileUrl
     }
-
 
 };
 
