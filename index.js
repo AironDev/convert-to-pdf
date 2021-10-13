@@ -117,7 +117,7 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
   // let fileData = 'tmp/in.pdf'
   const numberOfPages = (execSync(`pdftk /tmp/${fileParts} dump_data | grep NumberOfPages | awk '{print $2}' `).toString('utf8'));
   console.log(numberOfPages)
-  execSync(`pdftk /tmp/${fileParts} stamp /tmp/stamp.pdf output /tmp/${fileParts}`, (error, stdout, stderr) => {
+  execSync(`pdftk /tmp/${fileParts} stamp /tmp/stamp.pdf output /tmp/watermark/${fileParts}`, (error, stdout, stderr) => {
       if (error || stderr)
           reject(error);
       else
@@ -134,7 +134,7 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
 
 
 
-  let fileB64data = fs.readFileSync('/tmp/'+fileParts);
+  let fileB64data = fs.readFileSync('/tmp/watermark/'+fileParts);
   console.log(fileParts)
 
 
