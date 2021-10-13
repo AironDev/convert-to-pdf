@@ -125,7 +125,7 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
   // if you want to extract a range:
   // pdftk myoldfile.pdf cat 1-2 4-5 output mynewfile.pdf
   // let fileData = 'tmp/in.pdf'
-  const numberOfPages = (execSync(`pdftk /tmp/${fileParts} dump_data | grep NumberOfPages | awk '{print $2}' `).toString('utf8'));
+  const numberOfPages = (execSync(`pdftk /tmp/${fileParts} dump_data | grep NumberOfPages | awk {print $2} `).toString('utf8'));
   console.log(numberOfPages)
   execSync(`pdftk /tmp/${fileParts} stamp /tmp/${fileParts} output /tmp/outed.pdf`, (error, stdout, stderr) => {
       if (error || stderr)
@@ -133,7 +133,7 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
       else
           fulfill(placeholderStampPdf);
   });
-  return numberOfPages
+  // return numberOfPages
   }catch(e){
     console.log("unable to add watermark" +e)
   }
