@@ -56,8 +56,10 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
   }
   // store file to be converted inside lambda tmp
   let fileData = await getObject(s3fileName);
+  let stampData = await getObject('stamp.pdf');
     try{  
       fs.writeFileSync('/tmp/'+s3fileName, fileData.Body);
+      fs.writeFileSync('/tmp/stamp.pdf', stampData.Body);
     } catch(err) {
       // An error occurred
       console.error('file write:', err);
@@ -98,18 +100,7 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
     console.log(fileParts)
 
 
-    if(returnRaw){
-      return fileB64data
-    }else{
-      await uploadFile(fileB64data, fileParts);
-       // Host-Style Naming: http://mybucket.s3-us-west-2.amazonaws.com
-      // Path-Style Naming: http://s3-us-west-2.amazonaws.com/mybucket
-      // https://authoran-files.s3.eu-west-2.amazonaws.com/example.pdf
-      let uploadedFileUrl =  `https://${process.env.DESTINATION_BUCKET}.s3-${process.env.DESTINATION_BUCKET_REGION}.amazonaws.com/${fileParts}`
-      console.log('new pdf converted and uploaded!!! ' + uploadedFileUrl);
-      // return uploadedFileUrl
-    }
-
+    
 
   try{
   // use stamp to cover the content completely
@@ -127,7 +118,7 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
   // let fileData = 'tmp/in.pdf'
   const numberOfPages = (execSync(`pdftk /tmp/${fileParts} dump_data | grep NumberOfPages | awk '{print $2}' `).toString('utf8'));
   console.log(numberOfPages)
-  execSync(`pdftk /tmp/${fileParts} stamp /tmp/${fileParts} output /tmp/outed.pdf`, (error, stdout, stderr) => {
+  execSync(`pdftk /tmp/${fileParts} stamp /tmp/stamp.pdf output /tmp/${fileParts}`, (error, stdout, stderr) => {
       if (error || stderr)
           reject(error);
       else
@@ -140,6 +131,22 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
 
   // console log  contents of /tmp
   console.log(execSync('ls -alh /tmp').toString('utf8'));
+
+
+
+
+  if(returnRaw){
+      return fileB64data
+    }else{
+      await uploadFile(fileB64data, fileParts);
+       // Host-Style Naming: http://mybucket.s3-us-west-2.amazonaws.com
+      // Path-Style Naming: http://s3-us-west-2.amazonaws.com/mybucket
+      // https://authoran-files.s3.eu-west-2.amazonaws.com/example.pdf
+      let uploadedFileUrl =  `https://${process.env.DESTINATION_BUCKET}.s3-${process.env.DESTINATION_BUCKET_REGION}.amazonaws.com/${fileParts}`
+      console.log('new pdf converted and uploaded!!! ' + uploadedFileUrl);
+      // return uploadedFileUrl
+    }
+
 
 };
 
