@@ -98,6 +98,8 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
    
   let convertedFile = '/tmp/'+s3fileName.substr(0, s3fileName.lastIndexOf(".")) + ".pdf";
   let stampedFile = '/tmp/'+s3fileName.substr(0, s3fileName.lastIndexOf(".")) + "_stamped.pdf";
+  let stampedFileName = s3fileName.substr(0, s3fileName.lastIndexOf(".")) + ".pdf";
+
 
 
   try{
@@ -136,7 +138,7 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
   if(returnRaw){
       return fileB64data
     }else{
-      await uploadFile(fileB64data, s3fileName);
+      await uploadFile(fileB64data, stampedFileName);
        // Host-Style Naming: http://mybucket.s3-us-west-2.amazonaws.com
       // Path-Style Naming: http://s3-us-west-2.amazonaws.com/mybucket
       // https://authoran-files.s3.eu-west-2.amazonaws.com/example.pdf
