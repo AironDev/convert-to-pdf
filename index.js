@@ -85,6 +85,7 @@ module.exports.handler = async ({fileUrl, returnRaw,  Records} ) => {
        Body: buffer,
        Key: fileName,
        Bucket: process.env.DESTINATION_BUCKET,
+       ContentType: 'application/pdf'
       }, (error) => {
        if (error) {
         reject(error);
